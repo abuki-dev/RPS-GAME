@@ -90,27 +90,25 @@ function startGame() {
   }
 
   if (cur < tot) {
-    const domination =
-      (humanscore > Math.floor(tot / 2) ||
-        computerscore > Math.floor(tot / 2)) &&
-      (humanscore > tot - cur || computerscore > tot - cur);
-    if (domination) {
-      finalresult();
-      reset();
-      return;
-    }
     const roundResult = playround();
     showAlert(roundResult);
 
     cur = cur + 1;
     current.textContent = cur;
-    playerChoice.value = ""; // Reset choice for next round
+    playerChoice.value = ""; 
+    
+    const roundsLeft = tot - cur;
+    const scoreGap = Math.abs(humanscore - computerscore);
+    if(scoregap>remainning&&cur<tot){
+        finalresult();
+      reset();
+    }
 
     // Check for Game Over
     if (cur === tot) {
       finalresult();
       reset();
-      // Reset internal variables and display for a new game
+      
     }
   }
 }
