@@ -12,19 +12,27 @@ const closeModal = document.getElementById("close-modal");
 // Initialize scores as numbers
 let humanscore = 0;
 let computerscore = 0;
+const modalBox = modal.querySelector("div");
+
 function showAlert(message) {
   const icon = document.getElementById("modal-icon");
   modalMessage.textContent = message;
 
   if (message.includes("won")) icon.textContent = "🏆";
   else if (message.includes("lost")) icon.textContent = "💥";
-  else icon.textContent = "🤝"; // For draws
+  else icon.textContent = "🤝";
 
-  modal.classList.remove("hidden");
+  modal.classList.remove("opacity-0", "pointer-events-none");
+  modal.classList.add("opacity-100");
+  modalBox.classList.remove("scale-90", "translate-y-5");
+  modalBox.classList.add("scale-100", "translate-y-0");
 }
+
 closeModal.addEventListener("click", () => {
-  modal.classList.add("hidden");
-  // Hide it
+  modal.classList.add("opacity-0", "pointer-events-none");
+  modal.classList.remove("opacity-100");
+  modalBox.classList.add("scale-90", "translate-y-5");
+  modalBox.classList.remove("scale-100", "translate-y-0");
 });
 function getcomputerChoice() {
   let choice = Math.floor(Math.random() * 3) + 1;
@@ -63,11 +71,11 @@ function playround() {
 }
 function finalresult() {
   if (humanscore > computerscore) {
-    finall.textContent = `FINAL: You won the match ${humanscore}-${computerscore}!`;
+    finall.textContent = `FINAL: You won the match ${humanscore}-${computerscore}!🏆`;
   } else if (computerscore > humanscore) {
-    finall.textContent = `FINAL: You lost the match ${humanscore}-${computerscore}.`;
+    finall.textContent = `FINAL: You lost the match ${humanscore}-${computerscore}. ☠️`;
   } else {
-    finall.textContent = `FINAL: The match is a tie!`;
+    finall.textContent = `FINAL: The match is a tie! 🤝`;
   }
 }
 function reset() {
@@ -88,6 +96,7 @@ function startGame() {
     showAlert("Please choose Rock, Papper, or Scissor first!");
     return;
   }
+   if(totalrounds.value==""){showAlert("Please Enter Rounds you wanna play");return;}
 
   if (cur < tot) {
     const roundResult = playround();
@@ -99,7 +108,7 @@ function startGame() {
     
     const roundsLeft = tot - cur;
     const scoreGap = Math.abs(humanscore - computerscore);
-    if(scoregap>remainning&&cur<tot){
+    if(scoreGap>roundsLeft&&cur<tot){
         finalresult();
       reset();
     }
