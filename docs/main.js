@@ -117,6 +117,7 @@ function startGame() {
     if (cur === tot) {
       finalresult();
       reset();
+
       
     }
   }
@@ -125,7 +126,7 @@ function startGame() {
 // Event Listeners for all buttons
 for (const button of buttons) {
   button.addEventListener("click", () => {
-    // 1. Get the data-choice value
+    // 1. Get the data-choice value rock,papper,sissors
     const choice = button.getAttribute("data-choice");
 
     // 2. Handle the "Continue" button first - DO NOTHING and EXIT
