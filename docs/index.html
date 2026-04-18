@@ -68,59 +68,61 @@
           <span class="text-xs font-bold tracking-[.2em] uppercase text-blue-400 bg-blue-500/10 border border-blue-500/25 px-4 py-1.5 rounded-full">
             Triple A Techs
           </span>
-          <h1 class="text-5xl sm:text-6xl font-black tracking-tight leading-none flex items-center justify-center gap-3">
-            <span class="grad-title">BK</span> <span class="grad-title flex items-center gap-2">GAME <span style="font-size: 0.85em;">🎮</span></span>
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none flex items-center justify-center gap-2 sm:gap-3">
+            <span class="grad-title">BK</span> <span class="grad-title flex items-center gap-1.5 sm:gap-2">GAME <span style="font-size: 0.85em;">🎮</span></span>
           </h1>
           <p class="text-xs tracking-[.25em] uppercase text-slate-600">Rock · Paper · Scissors Logic Lab</p>
         </div>
 
         <!-- Setup card -->
-        <div class="bg-slate-900/70 border border-blue-500/15 rounded-2xl p-5 backdrop-blur-xl shadow-2xl shadow-black/50">
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-end gap-4">
+        <div class="bg-slate-900/70 border border-blue-500/15 rounded-2xl p-4 sm:p-5 backdrop-blur-xl shadow-2xl shadow-black/50">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-end gap-3 sm:gap-4">
             <label class="flex-1 flex flex-col gap-1.5">
               <span class="text-xs font-bold tracking-widest uppercase text-slate-500 pl-1">Current Selection</span>
               <input type="text" disabled id="player-choice" placeholder="Select a weapon…"
                 class="w-full bg-slate-950/80 border border-blue-500/15 rounded-xl px-4 py-3 text-blue-400 font-bold placeholder:text-slate-700 outline-none" />
             </label>
-            <label class="flex flex-col gap-1.5 sm:w-28">
-              <span class="text-xs font-bold tracking-widest uppercase text-slate-500 pl-1">Rounds</span>
-              <input type="number" id="totalrounds" value="5" min="1" max="99"
-                class="w-full bg-slate-950/80 border border-blue-500/15 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500/40 outline-none" />
-            </label>
-            <button type="button" class="btn-start sm:self-end w-full sm:w-auto bg-gradient-to-br from-blue-500 to-violet-600 hover:from-blue-400 hover:to-violet-500 text-white font-bold px-8 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 active:scale-95">
-              ⚡ Start Game
-            </button>
+            <div class="flex gap-3 sm:gap-4 sm:contents">
+              <label class="flex flex-col gap-1.5 w-24 sm:w-28">
+                <span class="text-xs font-bold tracking-widest uppercase text-slate-500 pl-1">Rounds</span>
+                <input type="number" id="totalrounds" value="5" min="1" max="99"
+                  class="w-full bg-slate-950/80 border border-blue-500/15 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500/40 outline-none" />
+              </label>
+              <button type="button" class="btn-start flex-1 sm:flex-none sm:self-end sm:w-auto bg-linear-to-br from-blue-500 to-violet-600 text-white font-bold px-6 sm:px-8 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-blue-500/30 active:scale-95">
+                ⚡ Start
+              </button>
+            </div>
           </div>
         </div>
 
         <!-- Weapon buttons -->
-        <div class="grid grid-cols-3 gap-3">
+        <div class="grid grid-cols-3 gap-2 sm:gap-3">
           <button data-choice="Rock"
-            class="weapon-btn group relative flex flex-col items-center gap-3 bg-slate-900/60 border border-blue-500/12 hover:border-blue-500/50 rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:bg-blue-500/7 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20 active:scale-95 overflow-hidden">
-            <span class="text-3xl sm:text-4xl transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6 select-none">🪨</span>
+            class="weapon-btn group relative flex flex-col items-center gap-2 sm:gap-3 bg-slate-900/60 border border-blue-500/12 rounded-2xl p-3 sm:p-5 transition-all duration-300 active:scale-95 overflow-hidden">
+            <span class="text-2xl sm:text-3xl md:text-4xl transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6 select-none">🪨</span>
             <span class="text-xs font-bold tracking-wider uppercase text-slate-500 group-hover:text-blue-400 transition-colors">Rock</span>
           </button>
           <button data-choice="Papper"
-            class="weapon-btn group relative flex flex-col items-center gap-3 bg-slate-900/60 border border-blue-500/12 hover:border-blue-500/50 rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:bg-blue-500/7 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20 active:scale-95 overflow-hidden">
-            <span class="text-3xl sm:text-4xl transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6 select-none">📄</span>
+            class="weapon-btn group relative flex flex-col items-center gap-2 sm:gap-3 bg-slate-900/60 border border-blue-500/12 rounded-2xl p-3 sm:p-5 transition-all duration-300 active:scale-95 overflow-hidden">
+            <span class="text-2xl sm:text-3xl md:text-4xl transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6 select-none">📄</span>
             <span class="text-xs font-bold tracking-wider uppercase text-slate-500 group-hover:text-blue-400 transition-colors">Paper</span>
           </button>
           <button data-choice="Scissor"
-            class="weapon-btn group relative flex flex-col items-center gap-3 bg-slate-900/60 border border-blue-500/12 hover:border-blue-500/50 rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:bg-blue-500/7 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20 active:scale-95 overflow-hidden">
-            <span class="text-3xl sm:text-4xl transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6 select-none">✂️</span>
+            class="weapon-btn group relative flex flex-col items-center gap-2 sm:gap-3 bg-slate-900/60 border border-blue-500/12 rounded-2xl p-3 sm:p-5 transition-all duration-300 active:scale-95 overflow-hidden">
+            <span class="text-2xl sm:text-3xl md:text-4xl transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6 select-none">✂️</span>
             <span class="text-xs font-bold tracking-wider uppercase text-slate-500 group-hover:text-blue-400 transition-colors">Scissors</span>
           </button>
         </div>
 
         <!-- Scoreboard -->
         <div class="grid grid-cols-2 rounded-2xl overflow-hidden border border-blue-500/12 shadow-xl shadow-black/40">
-          <div class="score-line-blue relative bg-slate-900/70 px-4 py-5 text-center">
+          <div class="score-line-blue relative bg-slate-900/70 px-4 py-4 sm:py-5 text-center">
             <p class="text-xs font-bold tracking-[.15em] uppercase text-slate-500 mb-1">Your Score</p>
-            <p id="your-score" class="grad-score-blue text-5xl font-black leading-none">0</p>
+            <p id="your-score" class="grad-score-blue text-4xl sm:text-5xl font-black leading-none">0</p>
           </div>
-          <div class="score-line-purple relative bg-slate-900/70 px-4 py-5 text-center border-l border-blue-500/12">
+          <div class="score-line-purple relative bg-slate-900/70 px-4 py-4 sm:py-5 text-center border-l border-blue-500/12">
             <p class="text-xs font-bold tracking-[.15em] uppercase text-slate-500 mb-1">CPU Score</p>
-            <p id="computer-score" class="grad-score-purple text-5xl font-black leading-none">0</p>
+            <p id="computer-score" class="grad-score-purple text-4xl sm:text-5xl font-black leading-none">0</p>
           </div>
         </div>
 
@@ -142,13 +144,13 @@
 
     <!-- ── Modal ── -->
     <div id="game-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-250">
-      <div class="modal-top-line relative bg-slate-900/95 border border-blue-500/25 rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl shadow-black/60 scale-90 translate-y-5 transition-all duration-300"
+      <div class="modal-top-line relative bg-slate-900/95 border border-blue-500/25 rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl shadow-black/60 scale-90 translate-y-5 transition-all duration-300"
            style="box-shadow:0 0 60px rgba(59,130,246,.15), 0 30px 80px rgba(0,0,0,.6);">
-        <span id="modal-icon" class="text-5xl block mb-3">📢</span>
-        <h2 id="modal-title" class="text-2xl font-black text-white mb-2">Round Result</h2>
-        <p id="modal-message" class="text-slate-400 text-sm leading-relaxed mb-6"></p>
+        <span id="modal-icon" class="text-4xl sm:text-5xl block mb-3">📢</span>
+        <h2 id="modal-title" class="text-xl sm:text-2xl font-black text-white mb-2">Round Result</h2>
+        <p id="modal-message" class="text-slate-400 text-sm leading-relaxed mb-5 sm:mb-6"></p>
         <button id="close-modal"
-          class="w-full bg-gradient-to-br from-blue-500 to-violet-600 hover:from-blue-400 hover:to-violet-500 text-white font-bold py-3.5 rounded-xl transition-all duration-200 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5 active:scale-95">
+          class="w-full bg-linear-to-br from-blue-500 to-violet-600 text-white font-bold py-3.5 rounded-xl transition-all duration-200 shadow-lg shadow-blue-500/30 active:scale-95">
           Continue →
         </button>
       </div>
