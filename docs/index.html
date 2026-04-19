@@ -206,6 +206,74 @@
       </div>
     </div>
     <script src="./main.js"></script>
+    <script>
+      // ── UI enhancements ──
+      const modal = document.getElementById('game-modal');
+      const modalBox = modal.querySelector('div');
+      const progressFill = document.getElementById('progress-fill');
+      const roundEl = document.getElementById('currunt-round');
+      const totalEl = document.getElementById('totalrounds');
+
+      // Weapon selection highlight
+      document.querySelectorAll('[data-choice]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('[data-choice]').forEach(b => {
+            b.classList.remove('border-blue-500', 'bg-blue-500/12', 'shadow-lg', 'shadow-blue-500/30');
+            b.classList.add('border-blue-500/12');
+          });
+          btn.classList.remove('border-blue-500/12');
+          btn.classList.add('border-blue-500', 'bg-blue-500/12', 'shadow-lg', 'shadow-blue-500/30');
+          spawnParticles(btn);
+        });
+      });
+
+      // Score pop
+      function popScore(el) {
+        el.classList.remove('score-pop');
+        void el.offsetWidth;
+        el.classList.add('score-pop');
+        setTimeout(() => el.classList.remove('score-pop'), 400);
+      }
+      new MutationObserver(m => m.forEach(r => popScore(r.target))).observe(document.getElementById('your-score'), { childList: true });
+      new MutationObserver(m => m.forEach(r => popScore(r.target))).observe(document.getElementById('computer-score'), { childList: true });
+
+      // Progress bar
+      new MutationObserver(() => {
+        const cur = parseInt(roundEl.textContent) || 0;
+        const tot = parseInt(totalEl.value) || 5;
+        progressFill.style.width = Math.min((cur / tot) * 100, 100) + '%';
+      }).observe(roundEl, { childList: true });
+
+      // Particles
+      function spawnParticles(btn) {
+        const r = btn.getBoundingClientRect();
+        const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+        const colors = ['#3b82f6','#8b5cf6','#06b6d4','#60a5fa','#a78bfa'];
+        for (let i = 0; i < 10; i++) {
+          const p = document.createElement('div');
+          p.className = 'particle';
+          const size = Math.random() * 6 + 3;
+          const angle = (Math.PI * 2 * i) / 10;
+          const dist = Math.random() * 60 + 30;
+          p.style.cssText = `width:${size}px;height:${size}px;left:${cx-size/2}px;top:${cy-size/2}px;background:${colors[i%5]};--dx:${Math.cos(angle)*dist}px;--dy:${Math.sin(angle)*dist}px;`;
+          document.body.appendChild(p);
+          setTimeout(() => p.remove(), 800);
+        }
+      }
+
+      // Reset clears weapon highlight & progress
+      setTimeout(() => {
+        const _reset = window.reset;
+        window.reset = function() {
+          _reset && _reset();
+          document.querySelectorAll('[data-choice]').forEach(b => {
+            b.classList.remove('border-blue-500', 'bg-blue-500/12', 'shadow-lg', 'shadow-blue-500/30');
+            b.classList.add('border-blue-500/12');
+          });
+          progressFill.style.width = '0%';
+        };
+      }, 10);
+    </script>
 
   </body>
 </html>
