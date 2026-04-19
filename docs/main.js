@@ -8,6 +8,7 @@ const buttons = document.querySelectorAll("button");
 const modal = document.getElementById("game-modal");
 const modalMessage = document.getElementById("modal-message");
 const closeModal = document.getElementById("close-modal");
+const modaltext = document.getElementById("modal-title");
 
 // Initialize scores as numbers
 let humanscore = 0;
@@ -17,10 +18,13 @@ const modalBox = modal.querySelector("div");
 function showAlert(message) {
   const icon = document.getElementById("modal-icon");
   modalMessage.textContent = message;
-
+  modaltext.textContent = "Round Result";
   if (message.includes("won")) icon.textContent = "🏆";
   else if (message.includes("lost")) icon.textContent = "💥";
-  else icon.textContent = "🤝";
+  else if (message.includes(`Please`)) {
+    icon.textContent = "⚠️";
+    modaltext.textContent = "Erorr";
+  } else icon.textContent = "🤝";
 
   modal.classList.remove("opacity-0", "pointer-events-none");
   modal.classList.add("opacity-100");
@@ -96,7 +100,10 @@ function startGame() {
     showAlert("Please choose Rock, Papper, or Scissor first!");
     return;
   }
-   if(totalrounds.value==""){showAlert("Please Enter Rounds you wanna play");return;}
+  if (totalrounds.value == "") {
+    showAlert("Please Enter Rounds you wanna play");
+    return;
+  }
 
   if (cur < tot) {
     const roundResult = playround();
@@ -104,12 +111,12 @@ function startGame() {
 
     cur = cur + 1;
     current.textContent = cur;
-    playerChoice.value = ""; 
-    
+    playerChoice.value = "";
+
     const roundsLeft = tot - cur;
     const scoreGap = Math.abs(humanscore - computerscore);
-    if(scoreGap>roundsLeft&&cur<tot){
-        finalresult();
+    if (scoreGap > roundsLeft && cur < tot) {
+      finalresult();
       reset();
     }
 
@@ -117,8 +124,6 @@ function startGame() {
     if (cur === tot) {
       finalresult();
       reset();
-
-      
     }
   }
 }

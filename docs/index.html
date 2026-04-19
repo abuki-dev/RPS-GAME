@@ -8,45 +8,202 @@
     <title>BK GAME | Rock Paper Scissors</title>
     <style>
       /* Animated orbs & grid — pure decorative, can't be done in Tailwind */
-      @keyframes drift { to { transform: translate(40px, 30px) scale(1.1); } }
-      @keyframes twinkle { to { opacity: 1; } }
-      @keyframes particle-fly { to { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0); } }
-      @keyframes pop { 50% { transform: scale(1.35); } 100% { transform: scale(1); } }
-      @keyframes modal-in { to { opacity: 1; transform: scale(1) translateY(0); } }
+      @keyframes drift {
+        to {
+          transform: translate(40px, 30px) scale(1.1);
+        }
+      }
+      @keyframes twinkle {
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes particle-fly {
+        to {
+          opacity: 0;
+          transform: translate(var(--dx), var(--dy)) scale(0);
+        }
+      }
+      @keyframes pop {
+        50% {
+          transform: scale(1.35);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      @keyframes modal-in {
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
 
-      .orb { position: absolute; border-radius: 9999px; filter: blur(80px); pointer-events: none; animation: drift 12s ease-in-out infinite alternate; }
-      .orb-1 { width: 400px; height: 400px; background: rgba(59,130,246,.13); top: -100px; left: -100px; }
-      .orb-2 { width: 300px; height: 300px; background: rgba(139,92,246,.1); bottom: -80px; right: -80px; animation-delay: -4s; }
-      .orb-3 { width: 200px; height: 200px; background: rgba(6,182,212,.08); top: 40%; left: 60%; animation-delay: -8s; }
+      .orb {
+        position: absolute;
+        border-radius: 9999px;
+        filter: blur(80px);
+        pointer-events: none;
+        animation: drift 12s ease-in-out infinite alternate;
+      }
+      .orb-1 {
+        width: 400px;
+        height: 400px;
+        background: rgba(59, 130, 246, 0.13);
+        top: -100px;
+        left: -100px;
+      }
+      .orb-2 {
+        width: 300px;
+        height: 300px;
+        background: rgba(139, 92, 246, 0.1);
+        bottom: -80px;
+        right: -80px;
+        animation-delay: -4s;
+      }
+      .orb-3 {
+        width: 200px;
+        height: 200px;
+        background: rgba(6, 182, 212, 0.08);
+        top: 40%;
+        left: 60%;
+        animation-delay: -8s;
+      }
 
       .grid-lines {
-        position: absolute; inset: 0;
-        background-image: linear-gradient(rgba(59,130,246,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,.04) 1px, transparent 1px);
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
         background-size: 60px 60px;
       }
-      .stars { position: absolute; inset: 0; background-image: radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.4) 0%, transparent 100%), radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,.3) 0%, transparent 100%), radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,.35) 0%, transparent 100%), radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.25) 0%, transparent 100%); animation: twinkle 6s ease-in-out infinite alternate; opacity: .4; }
+      .stars {
+        position: absolute;
+        inset: 0;
+        background-image:
+          radial-gradient(
+            1px 1px at 20% 30%,
+            rgba(255, 255, 255, 0.4) 0%,
+            transparent 100%
+          ),
+          radial-gradient(
+            1px 1px at 60% 70%,
+            rgba(255, 255, 255, 0.3) 0%,
+            transparent 100%
+          ),
+          radial-gradient(
+            1px 1px at 80% 20%,
+            rgba(255, 255, 255, 0.35) 0%,
+            transparent 100%
+          ),
+          radial-gradient(
+            1px 1px at 40% 80%,
+            rgba(255, 255, 255, 0.25) 0%,
+            transparent 100%
+          );
+        animation: twinkle 6s ease-in-out infinite alternate;
+        opacity: 0.4;
+      }
 
-      .score-pop { animation: pop .35s cubic-bezier(.34,1.56,.64,1); }
-      .particle { position: fixed; border-radius: 9999px; pointer-events: none; z-index: 200; animation: particle-fly .8s ease-out forwards; }
+      .score-pop {
+        animation: pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .particle {
+        position: fixed;
+        border-radius: 9999px;
+        pointer-events: none;
+        z-index: 200;
+        animation: particle-fly 0.8s ease-out forwards;
+      }
 
       /* gradient text */
-      .grad-title { background: linear-gradient(135deg, #fff 30%, #93c5fd 65%, #a78bfa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(59,130,246,.45)); }
-      .grad-score-blue { background: linear-gradient(135deg, #fff, #93c5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-      .grad-score-purple { background: linear-gradient(135deg, #fff, #c4b5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+      .grad-title {
+        background: linear-gradient(
+          135deg,
+          #fff 30%,
+          #93c5fd 65%,
+          #a78bfa 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.45));
+      }
+      .grad-score-blue {
+        background: linear-gradient(135deg, #fff, #93c5fd);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .grad-score-purple {
+        background: linear-gradient(135deg, #fff, #c4b5fd);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
 
       /* top-line accents on score cells */
-      .score-line-blue::before  { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,#3b82f6,transparent); opacity:.6; }
-      .score-line-purple::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,#8b5cf6,transparent); opacity:.6; }
+      .score-line-blue::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+        opacity: 0.6;
+      }
+      .score-line-purple::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
+        opacity: 0.6;
+      }
 
       /* modal top border */
-      .modal-top-line::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,#3b82f6,#8b5cf6,transparent); }
+      .modal-top-line::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          #3b82f6,
+          #8b5cf6,
+          transparent
+        );
+      }
 
       /* weapon glow on hover */
-      .weapon-btn::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 0%, rgba(59,130,246,.18) 0%, transparent 70%); opacity:0; transition:opacity .3s; border-radius:inherit; }
-      .weapon-btn:hover::before { opacity:1; }
+      .weapon-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at 50% 0%,
+          rgba(59, 130, 246, 0.18) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.3s;
+        border-radius: inherit;
+      }
+      .weapon-btn:hover::before {
+        opacity: 1;
+      }
 
       /* progress bar glow */
-      .progress-glow { box-shadow: 0 0 8px rgba(59,130,246,.7); }
+      .progress-glow {
+        box-shadow: 0 0 8px rgba(59, 130, 246, 0.7);
+      }
 
       /* Joystick icon */
       .joystick-icon {
@@ -65,7 +222,7 @@
         height: 40%;
         background: linear-gradient(135deg, #60a5fa, #8b5cf6);
         border-radius: 20% 20% 50% 50%;
-        box-shadow: 0 2px 8px rgba(59,130,246,0.5);
+        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.5);
       }
       .joystick-stick {
         position: absolute;
@@ -86,14 +243,29 @@
         height: 50%;
         background: radial-gradient(circle at 30% 30%, #fff, #93c5fd);
         border-radius: 50%;
-        box-shadow: 0 0 10px rgba(59,130,246,0.8);
+        box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
       }
     </style>
   </head>
   <body class="bg-slate-950 text-slate-200 min-h-screen overflow-x-hidden">
-
     <!-- ── Background scene ── -->
-    <div class="fixed inset-0 z-0 overflow-hidden" style="background:radial-gradient(ellipse 80% 60% at 50% -10%, rgba(59,130,246,.14) 0%, transparent 70%), radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139,92,246,.09) 0%, transparent 60%), #020617;">
+    <div
+      class="fixed inset-0 z-0 overflow-hidden"
+      style="
+        background:
+          radial-gradient(
+            ellipse 80% 60% at 50% -10%,
+            rgba(59, 130, 246, 0.14) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 60% 40% at 80% 80%,
+            rgba(139, 92, 246, 0.09) 0%,
+            transparent 60%
+          ),
+          #020617;
+      "
+    >
       <div class="grid-lines"></div>
       <div class="stars"></div>
       <div class="orb orb-1"></div>
@@ -102,18 +274,23 @@
     </div>
 
     <!-- ── Page ── -->
-    <div class="relative z-10 min-h-screen flex items-center justify-center px-4 py-8">
+    <div
+      class="relative z-10 min-h-screen flex items-center justify-center px-4 py-8"
+    >
       <div class="w-full max-w-lg flex flex-col gap-5">
-
         <!-- Header -->
         <div class="text-center flex flex-col items-center gap-2">
-          <span class="text-xs font-bold tracking-[.2em] uppercase text-blue-400 bg-blue-500/10 border border-blue-500/25 px-4 py-1.5 rounded-full">
+          <span
+            class="text-xs font-bold tracking-[.2em] uppercase text-blue-400 bg-blue-500/10 border border-blue-500/25 px-4 py-1.5 rounded-full"
+          >
             Triple A Techs
           </span>
-          <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none flex items-center justify-center gap-2 sm:gap-3">
-            <span class="grad-title">BK</span> 
+          <h1
+            class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none flex items-center justify-center gap-2 sm:gap-3"
+          >
+            <span class="grad-title">BK</span>
             <span class="grad-title flex items-center gap-1.5 sm:gap-2">
-              GAME 
+              GAME
               <span class="joystick-icon">
                 <span class="joystick-base"></span>
                 <span class="joystick-stick"></span>
@@ -121,24 +298,50 @@
               </span>
             </span>
           </h1>
-          <p class="text-xs tracking-[.25em] uppercase text-slate-600">Rock · Paper · Scissors Logic Lab</p>
+          <p class="text-xs tracking-[.25em] uppercase text-slate-600">
+            Rock · Paper · Scissors Logic Lab
+          </p>
         </div>
 
         <!-- Setup card -->
-        <div class="bg-slate-900/70 border border-blue-500/15 rounded-2xl p-4 sm:p-5 backdrop-blur-xl shadow-2xl shadow-black/50">
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-end gap-3 sm:gap-4">
+        <div
+          class="bg-slate-900/70 border border-blue-500/15 rounded-2xl p-4 sm:p-5 backdrop-blur-xl shadow-2xl shadow-black/50"
+        >
+          <div
+            class="flex flex-col sm:flex-row items-stretch sm:items-end gap-3 sm:gap-4"
+          >
             <label class="flex-1 flex flex-col gap-1.5">
-              <span class="text-xs font-bold tracking-widest uppercase text-slate-500 pl-1">Current Selection</span>
-              <input type="text" disabled id="player-choice" placeholder="Select a weapon…"
-                class="w-full bg-slate-950/80 border border-blue-500/15 rounded-xl px-4 py-3 text-blue-400 font-bold placeholder:text-slate-700 outline-none" />
+              <span
+                class="text-xs font-bold tracking-widest uppercase text-slate-500 pl-1"
+                >Current Selection</span
+              >
+              <input
+                type="text"
+                disabled
+                id="player-choice"
+                placeholder="Select a weapon…"
+                class="w-full bg-slate-950/80 border border-blue-500/15 rounded-xl px-4 py-3 text-blue-400 font-bold placeholder:text-slate-700 outline-none"
+              />
             </label>
             <div class="flex gap-3 sm:gap-4 sm:contents">
               <label class="flex flex-col gap-1.5 w-24 sm:w-28">
-                <span class="text-xs font-bold tracking-widest uppercase text-slate-500 pl-1">Rounds</span>
-                <input type="number" id="totalrounds" value="5" min="1" max="99"
-                  class="w-full bg-slate-950/80 border border-blue-500/15 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500/40 outline-none" />
+                <span
+                  class="text-xs font-bold tracking-widest uppercase text-slate-500 pl-1"
+                  >Rounds</span
+                >
+                <input
+                  type="number"
+                  id="totalrounds"
+                  value="5"
+                  min="1"
+                  max="99"
+                  class="w-full bg-slate-950/80 border border-blue-500/15 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500/40 outline-none"
+                />
               </label>
-              <button type="button" class="btn-start flex-1 sm:flex-none sm:self-end sm:w-auto bg-linear-to-br from-blue-500 to-violet-600 text-white font-bold px-6 sm:px-8 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-blue-500/30 active:scale-95">
+              <button
+                type="button"
+                class="btn-start flex-1 sm:flex-none sm:self-end sm:w-auto bg-linear-to-br from-blue-500 to-violet-600 text-white font-bold px-6 sm:px-8 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-blue-500/30 active:scale-95"
+              >
                 ⚡ Start
               </button>
             </div>
@@ -147,60 +350,142 @@
 
         <!-- Weapon buttons -->
         <div class="grid grid-cols-3 gap-2 sm:gap-3">
-          <button data-choice="Rock"
-            class="weapon-btn group relative flex flex-col items-center gap-2 sm:gap-3 bg-slate-900/60 border border-blue-500/12 rounded-2xl p-3 sm:p-5 transition-all duration-300 active:scale-95 overflow-hidden">
-            <span class="text-2xl sm:text-3xl md:text-4xl transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6 select-none">🪨</span>
-            <span class="text-xs font-bold tracking-wider uppercase text-slate-500 group-hover:text-blue-400 transition-colors">Rock</span>
+          <button
+            data-choice="Rock"
+            class="weapon-btn group relative flex flex-col items-center gap-2 sm:gap-3 bg-slate-900/60 border border-blue-500/12 rounded-2xl p-3 sm:p-5 transition-all duration-300 active:scale-95 overflow-hidden"
+          >
+            <span
+              class="text-2xl sm:text-3xl md:text-4xl transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6 select-none"
+              >🪨</span
+            >
+            <span
+              class="text-xs font-bold tracking-wider uppercase text-slate-500 group-hover:text-blue-400 transition-colors"
+              >Rock</span
+            >
           </button>
-          <button data-choice="Papper"
-            class="weapon-btn group relative flex flex-col items-center gap-2 sm:gap-3 bg-slate-900/60 border border-blue-500/12 rounded-2xl p-3 sm:p-5 transition-all duration-300 active:scale-95 overflow-hidden">
-            <span class="text-2xl sm:text-3xl md:text-4xl transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6 select-none">📄</span>
-            <span class="text-xs font-bold tracking-wider uppercase text-slate-500 group-hover:text-blue-400 transition-colors">Paper</span>
+          <button
+            data-choice="Papper"
+            class="weapon-btn group relative flex flex-col items-center gap-2 sm:gap-3 bg-slate-900/60 border border-blue-500/12 rounded-2xl p-3 sm:p-5 transition-all duration-300 active:scale-95 overflow-hidden"
+          >
+            <span
+              class="text-2xl sm:text-3xl md:text-4xl transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6 select-none"
+              >📄</span
+            >
+            <span
+              class="text-xs font-bold tracking-wider uppercase text-slate-500 group-hover:text-blue-400 transition-colors"
+              >Paper</span
+            >
           </button>
-          <button data-choice="Scissor"
-            class="weapon-btn group relative flex flex-col items-center gap-2 sm:gap-3 bg-slate-900/60 border border-blue-500/12 rounded-2xl p-3 sm:p-5 transition-all duration-300 active:scale-95 overflow-hidden">
-            <span class="text-2xl sm:text-3xl md:text-4xl transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6 select-none">✂️</span>
-            <span class="text-xs font-bold tracking-wider uppercase text-slate-500 group-hover:text-blue-400 transition-colors">Scissors</span>
+          <button
+            data-choice="Scissor"
+            class="weapon-btn group relative flex flex-col items-center gap-2 sm:gap-3 bg-slate-900/60 border border-blue-500/12 rounded-2xl p-3 sm:p-5 transition-all duration-300 active:scale-95 overflow-hidden"
+          >
+            <span
+              class="text-2xl sm:text-3xl md:text-4xl transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6 select-none"
+              >✂️</span
+            >
+            <span
+              class="text-xs font-bold tracking-wider uppercase text-slate-500 group-hover:text-blue-400 transition-colors"
+              >Scissors</span
+            >
           </button>
         </div>
 
         <!-- Scoreboard -->
-        <div class="grid grid-cols-2 rounded-2xl overflow-hidden border border-blue-500/12 shadow-xl shadow-black/40">
-          <div class="score-line-blue relative bg-slate-900/70 px-4 py-4 sm:py-5 text-center">
-            <p class="text-xs font-bold tracking-[.15em] uppercase text-slate-500 mb-1">Your Score</p>
-            <p id="your-score" class="grad-score-blue text-4xl sm:text-5xl font-black leading-none">0</p>
+        <div
+          class="grid grid-cols-2 rounded-2xl overflow-hidden border border-blue-500/12 shadow-xl shadow-black/40"
+        >
+          <div
+            class="score-line-blue relative bg-slate-900/70 px-4 py-4 sm:py-5 text-center"
+          >
+            <p
+              class="text-xs font-bold tracking-[.15em] uppercase text-slate-500 mb-1"
+            >
+              Your Score
+            </p>
+            <p
+              id="your-score"
+              class="grad-score-blue text-4xl sm:text-5xl font-black leading-none"
+            >
+              0
+            </p>
           </div>
-          <div class="score-line-purple relative bg-slate-900/70 px-4 py-4 sm:py-5 text-center border-l border-blue-500/12">
-            <p class="text-xs font-bold tracking-[.15em] uppercase text-slate-500 mb-1">CPU Score</p>
-            <p id="computer-score" class="grad-score-purple text-4xl sm:text-5xl font-black leading-none">0</p>
+          <div
+            class="score-line-purple relative bg-slate-900/70 px-4 py-4 sm:py-5 text-center border-l border-blue-500/12"
+          >
+            <p
+              class="text-xs font-bold tracking-[.15em] uppercase text-slate-500 mb-1"
+            >
+              CPU Score
+            </p>
+            <p
+              id="computer-score"
+              class="grad-score-purple text-4xl sm:text-5xl font-black leading-none"
+            >
+              0
+            </p>
           </div>
         </div>
 
         <!-- Status bar -->
-        <div class="bg-slate-900/60 border border-blue-500/12 rounded-2xl px-5 py-4 flex flex-col gap-3">
+        <div
+          class="bg-slate-900/60 border border-blue-500/12 rounded-2xl px-5 py-4 flex flex-col gap-3"
+        >
           <div class="flex items-center justify-between">
-            <span class="text-xs font-bold tracking-[.15em] uppercase text-slate-500">Round Progress</span>
-            <span id="currunt-round" class="text-sm font-black text-blue-400 bg-blue-500/12 border border-blue-500/25 px-3 py-0.5 rounded-full min-w-[2.5rem] text-center">0</span>
+            <span
+              class="text-xs font-bold tracking-[.15em] uppercase text-slate-500"
+              >Round Progress</span
+            >
+            <span
+              id="currunt-round"
+              class="text-sm font-black text-blue-400 bg-blue-500/12 border border-blue-500/25 px-3 py-0.5 rounded-full min-w-[2.5rem] text-center"
+              >0</span
+            >
           </div>
           <!-- Progress track -->
           <div class="h-1 bg-blue-500/10 rounded-full overflow-hidden">
-            <div id="progress-fill" class="progress-glow h-full bg-gradient-to-r from-blue-500 to-violet-500 rounded-full w-0 transition-all duration-500"></div>
+            <div
+              id="progress-fill"
+              class="progress-glow h-full bg-gradient-to-r from-blue-500 to-violet-500 rounded-full w-0 transition-all duration-500"
+            ></div>
           </div>
-          <p id="result" class="text-base font-bold italic text-white text-center min-h-[1.5rem]" style="text-shadow:0 0 20px rgba(59,130,246,.5)"></p>
+          <p
+            id="result"
+            class="text-base font-bold italic text-white text-center min-h-[1.5rem]"
+            style="text-shadow: 0 0 20px rgba(59, 130, 246, 0.5)"
+          ></p>
         </div>
-
       </div>
     </div>
 
     <!-- ── Modal ── -->
-    <div id="game-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-250">
-      <div class="modal-top-line relative bg-slate-900/95 border border-blue-500/25 rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl shadow-black/60 scale-90 translate-y-5 transition-all duration-300"
-           style="box-shadow:0 0 60px rgba(59,130,246,.15), 0 30px 80px rgba(0,0,0,.6);">
+    <div
+      id="game-modal"
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-250"
+    >
+      <div
+        class="modal-top-line relative bg-slate-900/95 border border-blue-500/25 rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl shadow-black/60 scale-90 translate-y-5 transition-all duration-300"
+        style="
+          box-shadow:
+            0 0 60px rgba(59, 130, 246, 0.15),
+            0 30px 80px rgba(0, 0, 0, 0.6);
+        "
+      >
         <span id="modal-icon" class="text-4xl sm:text-5xl block mb-3">📢</span>
-        <h2 id="modal-title" class="text-xl sm:text-2xl font-black text-white mb-2">Round Result</h2>
-        <p id="modal-message" class="text-slate-400 text-sm leading-relaxed mb-5 sm:mb-6"></p>
-        <button id="close-modal"
-          class="w-full bg-linear-to-br from-blue-500 to-violet-600 text-white font-bold py-3.5 rounded-xl transition-all duration-200 shadow-lg shadow-blue-500/30 active:scale-95">
+        <h2
+          id="modal-title"
+          class="text-xl sm:text-2xl font-black text-white mb-2"
+        >
+          Round Result
+        </h2>
+        <p
+          id="modal-message"
+          class="text-slate-400 text-sm leading-relaxed mb-5 sm:mb-6"
+        ></p>
+        <button
+          id="close-modal"
+          class="w-full bg-linear-to-br from-blue-500 to-violet-600 text-white font-bold py-3.5 rounded-xl transition-all duration-200 shadow-lg shadow-blue-500/30 active:scale-95"
+        >
           Continue →
         </button>
       </div>
@@ -208,54 +493,71 @@
     <script src="./main.js"></script>
     <script>
       // ── UI enhancements ──
-      const modal = document.getElementById('game-modal');
-      const modalBox = modal.querySelector('div');
-      const progressFill = document.getElementById('progress-fill');
-      const roundEl = document.getElementById('currunt-round');
-      const totalEl = document.getElementById('totalrounds');
+      const modal = document.getElementById("game-modal");
+      const modalBox = modal.querySelector("div");
+      const progressFill = document.getElementById("progress-fill");
+      const roundEl = document.getElementById("currunt-round");
+      const totalEl = document.getElementById("totalrounds");
 
       // Weapon selection highlight
-      document.querySelectorAll('[data-choice]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('[data-choice]').forEach(b => {
-            b.classList.remove('border-blue-500', 'bg-blue-500/12', 'shadow-lg', 'shadow-blue-500/30');
-            b.classList.add('border-blue-500/12');
+      document.querySelectorAll("[data-choice]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll("[data-choice]").forEach((b) => {
+            b.classList.remove(
+              "border-blue-500",
+              "bg-blue-500/12",
+              "shadow-lg",
+              "shadow-blue-500/30",
+            );
+            b.classList.add("border-blue-500/12");
           });
-          btn.classList.remove('border-blue-500/12');
-          btn.classList.add('border-blue-500', 'bg-blue-500/12', 'shadow-lg', 'shadow-blue-500/30');
+          btn.classList.remove("border-blue-500/12");
+          btn.classList.add(
+            "border-blue-500",
+            "bg-blue-500/12",
+            "shadow-lg",
+            "shadow-blue-500/30",
+          );
           spawnParticles(btn);
         });
       });
 
       // Score pop
       function popScore(el) {
-        el.classList.remove('score-pop');
+        el.classList.remove("score-pop");
         void el.offsetWidth;
-        el.classList.add('score-pop');
-        setTimeout(() => el.classList.remove('score-pop'), 400);
+        el.classList.add("score-pop");
+        setTimeout(() => el.classList.remove("score-pop"), 400);
       }
-      new MutationObserver(m => m.forEach(r => popScore(r.target))).observe(document.getElementById('your-score'), { childList: true });
-      new MutationObserver(m => m.forEach(r => popScore(r.target))).observe(document.getElementById('computer-score'), { childList: true });
+      new MutationObserver((m) => m.forEach((r) => popScore(r.target))).observe(
+        document.getElementById("your-score"),
+        { childList: true },
+      );
+      new MutationObserver((m) => m.forEach((r) => popScore(r.target))).observe(
+        document.getElementById("computer-score"),
+        { childList: true },
+      );
 
       // Progress bar
       new MutationObserver(() => {
         const cur = parseInt(roundEl.textContent) || 0;
         const tot = parseInt(totalEl.value) || 5;
-        progressFill.style.width = Math.min((cur / tot) * 100, 100) + '%';
+        progressFill.style.width = Math.min((cur / tot) * 100, 100) + "%";
       }).observe(roundEl, { childList: true });
 
       // Particles
       function spawnParticles(btn) {
         const r = btn.getBoundingClientRect();
-        const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-        const colors = ['#3b82f6','#8b5cf6','#06b6d4','#60a5fa','#a78bfa'];
+        const cx = r.left + r.width / 2,
+          cy = r.top + r.height / 2;
+        const colors = ["#3b82f6", "#8b5cf6", "#06b6d4", "#60a5fa", "#a78bfa"];
         for (let i = 0; i < 10; i++) {
-          const p = document.createElement('div');
-          p.className = 'particle';
+          const p = document.createElement("div");
+          p.className = "particle";
           const size = Math.random() * 6 + 3;
           const angle = (Math.PI * 2 * i) / 10;
           const dist = Math.random() * 60 + 30;
-          p.style.cssText = `width:${size}px;height:${size}px;left:${cx-size/2}px;top:${cy-size/2}px;background:${colors[i%5]};--dx:${Math.cos(angle)*dist}px;--dy:${Math.sin(angle)*dist}px;`;
+          p.style.cssText = `width:${size}px;height:${size}px;left:${cx - size / 2}px;top:${cy - size / 2}px;background:${colors[i % 5]};--dx:${Math.cos(angle) * dist}px;--dy:${Math.sin(angle) * dist}px;`;
           document.body.appendChild(p);
           setTimeout(() => p.remove(), 800);
         }
@@ -264,16 +566,20 @@
       // Reset clears weapon highlight & progress
       setTimeout(() => {
         const _reset = window.reset;
-        window.reset = function() {
+        window.reset = function () {
           _reset && _reset();
-          document.querySelectorAll('[data-choice]').forEach(b => {
-            b.classList.remove('border-blue-500', 'bg-blue-500/12', 'shadow-lg', 'shadow-blue-500/30');
-            b.classList.add('border-blue-500/12');
+          document.querySelectorAll("[data-choice]").forEach((b) => {
+            b.classList.remove(
+              "border-blue-500",
+              "bg-blue-500/12",
+              "shadow-lg",
+              "shadow-blue-500/30",
+            );
+            b.classList.add("border-blue-500/12");
           });
-          progressFill.style.width = '0%';
+          progressFill.style.width = "0%";
         };
       }, 10);
     </script>
-
   </body>
 </html>
