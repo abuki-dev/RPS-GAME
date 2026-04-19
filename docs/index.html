@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
     <link rel="stylesheet" href="./output.css" />
     <title>BK GAME | Rock Paper Scissors</title>
     <style>
@@ -46,6 +47,47 @@
 
       /* progress bar glow */
       .progress-glow { box-shadow: 0 0 8px rgba(59,130,246,.7); }
+
+      /* Joystick icon */
+      .joystick-icon {
+        display: inline-block;
+        width: 0.85em;
+        height: 0.85em;
+        position: relative;
+        vertical-align: middle;
+      }
+      .joystick-base {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 40%;
+        background: linear-gradient(135deg, #60a5fa, #8b5cf6);
+        border-radius: 20% 20% 50% 50%;
+        box-shadow: 0 2px 8px rgba(59,130,246,0.5);
+      }
+      .joystick-stick {
+        position: absolute;
+        bottom: 30%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 25%;
+        height: 50%;
+        background: linear-gradient(180deg, #93c5fd, #60a5fa);
+        border-radius: 30% 30% 0 0;
+      }
+      .joystick-ball {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50%;
+        height: 50%;
+        background: radial-gradient(circle at 30% 30%, #fff, #93c5fd);
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(59,130,246,0.8);
+      }
     </style>
   </head>
   <body class="bg-slate-950 text-slate-200 min-h-screen overflow-x-hidden">
@@ -69,7 +111,15 @@
             Triple A Techs
           </span>
           <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none flex items-center justify-center gap-2 sm:gap-3">
-            <span class="grad-title">BK</span> <span class="grad-title flex items-center gap-1.5 sm:gap-2">GAME <span style="font-size: 0.85em;">🎮</span></span>
+            <span class="grad-title">BK</span> 
+            <span class="grad-title flex items-center gap-1.5 sm:gap-2">
+              GAME 
+              <span class="joystick-icon">
+                <span class="joystick-base"></span>
+                <span class="joystick-stick"></span>
+                <span class="joystick-ball"></span>
+              </span>
+            </span>
           </h1>
           <p class="text-xs tracking-[.25em] uppercase text-slate-600">Rock · Paper · Scissors Logic Lab</p>
         </div>

@@ -138,7 +138,7 @@ for (const button of buttons) {
     finall.textContent = "";
 
     // 4. Handle Start logic
-    if (button.textContent.includes("Start Game")) {
+    if (button.textContent.includes("⚡ Start")) {
       startGame();
     }
     // 5. Handle weapon choice logic
